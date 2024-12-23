@@ -17,7 +17,7 @@ mod wrapper;
 pub use error::Error;
 use wrapper::ConnectionOptions;
 pub use wrapper::DbPool;
-
+pub use wrapper;
 use futures_core::future::BoxFuture;
 use serde::{Deserialize, Serialize};
 use sqlx::{
