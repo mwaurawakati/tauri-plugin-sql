@@ -1,0 +1,6 @@
+cargo:rerun-if-changed=permissions
+cargo:PERMISSION_FILES_PATH=C:\Users\Administrator\Desktop\tauri-plugin-sql\target\debug\build\tauri-plugin-sql-7903ea0a96bb5c15\out\tauri-plugin-sql-permission-files
+cargo:GLOBAL_API_SCRIPT_PATH=\\?\C:\Users\Administrator\Desktop\tauri-plugin-sql\api-iife.js
+cargo:rustc-check-cfg=cfg(mobile)
+cargo:rustc-check-cfg=cfg(desktop)
+cargo:rustc-cfg=desktop

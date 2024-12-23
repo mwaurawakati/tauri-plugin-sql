@@ -15,13 +15,14 @@ mod error;
 mod wrapper;
 
 pub use error::Error;
+use wrapper::ConnectionOptions;
 pub use wrapper::DbPool;
 
 use futures_core::future::BoxFuture;
 use serde::{Deserialize, Serialize};
 use sqlx::{
     error::BoxDynError,
-    migrate::{Migration as SqlxMigration, MigrationSource, MigrationType, Migrator},
+    migrate::{Migration as SqlxMigration, MigrationSource, MigrationType, Migrator}
 };
 use tauri::{
     plugin::{Builder as PluginBuilder, TauriPlugin},
@@ -134,7 +135,7 @@ impl Builder {
         self
     }
 
-    pub fn build<R: Runtime>(mut self) -> TauriPlugin<R, Option<PluginConfig>> {
+    pub fn build<R: Runtime>(mut self, opts: Option<ConnectionOptions>) -> TauriPlugin<R, Option<PluginConfig>> {
         PluginBuilder::<R, Option<PluginConfig>>::new("sql")
             .invoke_handler(tauri::generate_handler![
                 commands::load,
@@ -150,7 +151,7 @@ impl Builder {
                     let mut lock = instances.0.write().await;
 
                     for db in config.preload {
-                        let pool = DbPool::connect(&db, app).await?;
+                        let pool = DbPool::connect(&db, opts.clone(), app).await?;
 
                         if let Some(migrations) =
                             self.migrations.as_mut().and_then(|mm| mm.remove(&db))

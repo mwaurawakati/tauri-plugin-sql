@@ -6,7 +6,10 @@
 use std::fs::create_dir_all;
 
 use indexmap::IndexMap;
+use serde::Deserialize;
 use serde_json::Value as JsonValue;
+#[cfg(any(feature = "sqlite"))]
+use sqlx::sqlite::{SqliteConnectOptions, SqliteJournalMode};
 #[cfg(any(feature = "sqlite", feature = "mysql", feature = "postgres"))]
 use sqlx::{migrate::MigrateDatabase, Column, Executor, Pool, Row};
 #[cfg(any(feature = "sqlite", feature = "mysql", feature = "postgres"))]
@@ -22,6 +25,10 @@ use sqlx::Sqlite;
 
 use crate::LastInsertId;
 
+#[derive(Debug, Clone, Deserialize)]
+pub struct ConnectionOptions {
+    pub encryption_key: String,
+}
 pub enum DbPool {
     #[cfg(feature = "sqlite")]
     Sqlite(Pool<Sqlite>),
@@ -67,6 +74,7 @@ pub enum DbPool {
 impl DbPool {
     pub(crate) async fn connect<R: Runtime>(
         conn_url: &str,
+        opts: Option<ConnectionOptions>,
         _app: &AppHandle<R>,
     ) -> Result<Self, crate::Error> {
         match conn_url
@@ -88,7 +96,21 @@ impl DbPool {
                 if !Sqlite::database_exists(conn_url).await.unwrap_or(false) {
                     Sqlite::create_database(conn_url).await?;
                 }
-                Ok(Self::Sqlite(Pool::connect(conn_url).await?))
+                let conn_opts = SqliteConnectOptions::from_str(conn_url)?
+                    .journal_mode(SqliteJournalMode::Wal)
+                    .read_only(false);
+                match opts {
+                    Some(opts) => {
+                        conn_opts
+                        .pragma("key", opts.encryption_key)
+                        .pragma("cipher_page_size", "1024")
+                        .pragma("kdf_iter", "64000")
+                        .pragma("cipher_hmac_algorithm", "HMAC_SHA1")
+                        .pragma("cipher_kdf_algorithm", "PBKDF2_HMAC_SHA1");
+                    }
+                    None => {}
+                }
+                Ok(Self::Sqlite(Pool::connect_with(conn_opts).await?))
             }
             #[cfg(feature = "mysql")]
             "mysql" => {

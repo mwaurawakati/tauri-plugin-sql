@@ -1,0 +1,10 @@
+C:\Users\Administrator\Desktop\tauri-plugin-sql\target\debug\deps\libsqlformat-84068712866b31bc.rmeta: C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src/lib.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\formatter.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\indentation.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\inline_block.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\params.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\tokenizer.rs
+
+C:\Users\Administrator\Desktop\tauri-plugin-sql\target\debug\deps\sqlformat-84068712866b31bc.d: C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src/lib.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\formatter.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\indentation.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\inline_block.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\params.rs C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\tokenizer.rs
+
+C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src/lib.rs:
+C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\formatter.rs:
+C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\indentation.rs:
+C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\inline_block.rs:
+C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\params.rs:
+C:\Users\Administrator\.cargo\registry\src\index.crates.io-6f17d22bba15001f\sqlformat-0.2.6\src\tokenizer.rs:
