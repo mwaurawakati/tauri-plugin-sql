@@ -4,7 +4,7 @@
 
 #[cfg(feature = "sqlite")]
 use std::fs::create_dir_all;
-
+use std::str::FromStr;
 use indexmap::IndexMap;
 use serde::Deserialize;
 use serde_json::Value as JsonValue;
