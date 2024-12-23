@@ -96,20 +96,22 @@ impl DbPool {
                 if !Sqlite::database_exists(conn_url).await.unwrap_or(false) {
                     Sqlite::create_database(conn_url).await?;
                 }
-                let conn_opts = SqliteConnectOptions::from_str(conn_url)?
+                let mut conn_opts = SqliteConnectOptions::from_str(conn_url)?
                     .journal_mode(SqliteJournalMode::Wal)
                     .read_only(false);
-                match opts {
+                conn_opts = match opts {
                     Some(opts) => {
-                        conn_opts
+                        conn_opts.clone()
                         .pragma("key", opts.encryption_key)
                         .pragma("cipher_page_size", "1024")
                         .pragma("kdf_iter", "64000")
                         .pragma("cipher_hmac_algorithm", "HMAC_SHA1")
-                        .pragma("cipher_kdf_algorithm", "PBKDF2_HMAC_SHA1");
+                        .pragma("cipher_kdf_algorithm", "PBKDF2_HMAC_SHA1")
                     }
-                    None => {}
-                }
+                    None => {
+                        conn_opts.clone()
+                    }
+                };
                 Ok(Self::Sqlite(Pool::connect_with(conn_opts).await?))
             }
             #[cfg(feature = "mysql")]
