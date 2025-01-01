@@ -97,6 +97,7 @@ impl DbPool {
                     Sqlite::create_database(conn_url).await?;
                 }
                 let mut conn_opts = SqliteConnectOptions::from_str(conn_url)?
+                    .extension("sqlcipher")
                     .journal_mode(SqliteJournalMode::Wal)
                     .read_only(false);
                 conn_opts = match opts {
