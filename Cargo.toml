@@ -35,8 +35,8 @@ sqlx = { version = "0.8", features = ["json", "time"] }
 time = "0.3"
 tokio = { version = "1", features = ["sync"] }
 indexmap = { version = "2", features = ["serde"] }
-libsqlite3-sys = { version = "*", features = ["bundled"] }
-rusqlite = "=0.32.1"
+libsqlite3-sys = { version = "*", features = ["bundled-sqlcipher-vendored-openssl"] }
+rusqlite = {version="=0.32.1", features= ["bundled-sqlcipher-vendored-openssl"] }
 
 [features]
 sqlite = ["sqlx/sqlite", "sqlx/runtime-tokio"]
