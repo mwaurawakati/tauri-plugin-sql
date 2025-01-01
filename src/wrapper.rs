@@ -102,7 +102,7 @@ impl DbPool {
                 conn_opts = match opts {
                     
                     Some(opts) => {
-                        println!("found some opts: {:?}", opts)
+                        println!("found some opts: {:?}", opts);
                         conn_opts = conn_opts.clone()
                         .pragma("key", opts.encryption_key)
                         .pragma("cipher_page_size", "1024")
